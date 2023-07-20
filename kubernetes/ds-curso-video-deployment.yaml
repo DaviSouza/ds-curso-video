@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ds-curso-video-deployment
+spec:
+  template:
+    metadata:
+      name: ds-curso-video
+      labels:
+        app: ds-curso-video
+    spec:
+      containers:
+        - name: ds-curso-video-container
+          image: ds_curso_video_image
+          ports:
+            - containerPort: 8000
+          envFrom:
+            - configMapRef:
+                name: portal-configmap
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8000
+            periodSeconds: 10
+            failureThreshold: 3
+            initialDelaySeconds: 20
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8000
+            periodSeconds: 10
+            failureThreshold: 5
+            initialDelaySeconds: 3
+          resources:
+            requests:
+              cpu: 10m
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ds-curso-video

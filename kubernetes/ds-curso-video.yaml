@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ds-curso-video
+  labels:
+    app: ds-curso-video
+spec:
+  containers:
+    - name: ds-curso-video-container
+      image: ds_curso_video_image
+      ports:
+        - containerPort: 8000
+      envFrom:
+        - configMapRef:
+            name: ds-curso-video-configmap
