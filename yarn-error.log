@@ -1,0 +1,31 @@
+Arguments: 
+  /usr/local/bin/node /snap/node/7588/bin/yarn.js set version from sources
+
+PATH: 
+  /home/davi/.local/bin:/home/davi/.cargo/bin:/home/davi/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  20.2.0
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: Release not found: from
+      at /snap/node/7588/lib/cli.js:86358:17
+      at Generator.next (<anonymous>)
+      at step (/snap/node/7588/lib/cli.js:310:30)
+      at /snap/node/7588/lib/cli.js:321:13
+      at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+
+npm manifest: 
+  No manifest
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

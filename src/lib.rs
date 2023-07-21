@@ -30,6 +30,10 @@ impl<'r> FromRequest<'r> for DbConn {
         Outcome::Success((db_conn))
     }
 }*/
+#[get("/")]
+fn hello() -> &'static str {
+    "Aplicação de vídeo aula em Rust e Mongodb"
+}
 
 #[launch]
 pub fn rocket() -> Rocket<Build>  {
@@ -38,6 +42,7 @@ pub fn rocket() -> Rocket<Build>  {
     rocket::build()
         .manage(db_conn)
         .register("/",catchers![internal_error, not_found])
+        .mount("/", routes![hello])
         .mount(
             "/alunos",
             routes![

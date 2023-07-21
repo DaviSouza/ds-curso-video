@@ -1,5 +1,5 @@
 use dotenv::dotenv;
-use mongodb::{sync::{Client, Database}};
+use mongodb::sync::{Client, Database};
 use std::env;
 
 use mongodb::bson;
