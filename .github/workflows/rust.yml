@@ -2,21 +2,54 @@ name: Rust
 
 on:
   push:
-    branches: [ "*" ]
+    branches: [ '*' ]
   pull_request:
-    branches: [ "*" ]
+    branches: [ '*' ]
 
 env:
   CARGO_TERM_COLOR: always
-
+  
 jobs:
-  build:
-
+  compile:
+    name: Compile
     runs-on: ubuntu-latest
-
+    steps:
+      - name: Setup | Checkout
+        uses: actions/checkout@v2
+      - name: Setup | Rust
+        uses: ATiltedTree/setup-rust@v1
+        with:
+          rust-version: stable
+      - name: Build | Compile
+        run: cargo check
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    needs: [compile]
+    steps:
+      - name: Setup | Checkout
+        uses: actions/checkout@v2
+      - name: Setup | Rust
+        uses: ATiltedTree/setup-rust@v1
+        with:
+          rust-version: stable
+      - name: Run tests
+        run: cargo test RUST_BACKTRACE=1 --verbose
+        
+  build:
+    needs: test
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
     - name: Build
       run: cargo build --verbose
-    - name: Run tests
-      run: cargo test --verbose
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v3.1.0
+      with:
+        name: ds-curso-video
+        path: src
+
+  docker:
+    needs: build
+    uses: ./.github/workflows/Docker.yaml
+    secrets: inherit

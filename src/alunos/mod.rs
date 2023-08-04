@@ -30,7 +30,7 @@ impl InsertableAluno {
             cursos: aluno.cursos,
         }
     }
-    fn to_aluno(aluno: InsertableAluno) -> Aluno {
+    pub fn to_aluno(aluno: InsertableAluno) -> Aluno {
         Aluno {
             id:Some(ObjectId::parse_str(aluno.id).unwrap()),
             nome: aluno.nome,

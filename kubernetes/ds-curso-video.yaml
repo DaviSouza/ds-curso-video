@@ -7,7 +7,7 @@ metadata:
 spec:
   containers:
     - name: ds-curso-video-container
-      image: ds_curso_video_image
+      image: davisouza23/ds_curso_video_image:latest
       ports:
         - containerPort: 8000
       envFrom:
