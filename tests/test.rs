@@ -27,19 +27,24 @@ mod tests {
         let mut server = mockito::Server::new();
 
         let mut mock_collection = MockMockCollection::new();
+
         mock_collection.expect_find().returning(|_, _| {
+            let obj1 = ObjectId::new();
+            let obj2 = ObjectId::new();
+            let obj3 = ObjectId::new();
+            let obj4 = ObjectId::new();
             let alunos = vec![
                 Aluno {
                     id: Some(ObjectId::new()),
                     nome: "Aluno 1".to_string(),
                     email: "aluno1@example.com".to_string(),
-                    cursos: vec![1, 2],
+                    cursos: vec![obj1, obj2],
                 },
                 Aluno {
                     id: Some(ObjectId::new()),
                     nome: "Aluno 2".to_string(),
                     email: "aluno2@example.com".to_string(),
-                    cursos: vec![3, 4],
+                    cursos: vec![obj3, obj4],
                 },
             ];
             let cursor = Cursor::new(alunos);

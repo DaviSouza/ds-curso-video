@@ -10,6 +10,7 @@ use rocket::Rocket;
 pub mod mongo_connection;
 pub mod alunos;
 pub mod cursos;
+pub mod relatorios;
 
 #[catch(500)]
 fn internal_error() -> &'static str {
@@ -61,6 +62,11 @@ pub fn rocket() -> Rocket<Build>  {
                 cursos::handler::put,
                 cursos::handler::get_curso,            
                 cursos::handler::delete_curso
+            ],
+        )        
+        .mount("/relatorios",routes![
+            relatorios::handler::build_report_all,
+            relatorios::handler::build_report_by_name
             ],
         )
 }

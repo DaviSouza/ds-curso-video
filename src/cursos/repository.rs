@@ -65,7 +65,7 @@ pub fn update(
     let updated_doc = collection
         .update_one(filter, new_doc, options)
         .ok()
-        .expect("Error updating user");
+        .expect("Error ao atualizar o curso");
     Ok(updated_doc)
 }
 
@@ -76,6 +76,6 @@ pub fn delete(id: &String, db_conn: &DbConn) -> Result<DeleteResult, Error> {
     let curso = collection
         .delete_one(filter, None)
         .ok()
-        .expect("Error ao criar curso");
+        .expect("Error ao deletar curso");
     Ok(curso)
 }

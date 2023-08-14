@@ -1,0 +1,33 @@
+name: Entrega continua
+
+on:
+  workflow_call:
+
+jobs:
+  EC2:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download a Build Artifact
+      uses: actions/download-artifact@v3.0.0
+      with:
+        name: ds-curso-video
+    - uses: actions/checkout@v3
+
+    - name: Upload Application to EC2
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.REMOTE_HOST }}
+        username: ${{ secrets.REMOTE_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        source: target/release/ds-curso-video
+        target: /path/to/remote/directory
+
+    - name: SSH into EC2 and Restart Application
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.REMOTE_HOST }}
+        username: ${{ secrets.REMOTE_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          cd /path/to/remote/directory
+          sudo systemctl restart ds-curso-video	    

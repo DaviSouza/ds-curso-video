@@ -9,7 +9,7 @@ pub struct Aluno {
     pub id: Option<ObjectId>,
     pub nome: String,
     pub email: String,
-    pub cursos: Vec<i32>,
+    pub cursos: Vec<ObjectId>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
@@ -17,7 +17,7 @@ pub struct InsertableAluno {
     pub id:String,
     pub nome: String,
     pub email: String,
-    pub cursos: Vec<i32>,
+    pub cursos: Vec<ObjectId>,
 }
 
 impl InsertableAluno {
